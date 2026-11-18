@@ -1,4 +1,5 @@
 <html>
+
 <head>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,60 +10,153 @@
 
 <body ondragstart="return false;" ondrop="return false;">
 
-<div class="CoolSam999">
-  
-  <center class="Logo"> <img draggable = false id="Logo" src="/content/logo.png" height="140" style="margin-top: 20"/> </center>
-  <center class="YouTube"> <a draggable = false href="https://youtube.com/@Samm"> <img draggable = false class="img" id="YouTube" src="/content/youtube.png"/> </a> </center>
-  <center class="Twitter"> <a draggable = false href="https://x.com/CoolSam9991"> <img draggable = false class="img" id="Twitter" src="/content/twitter.png"/> </a> </center>
-  <center class="justin.tv"> <a draggable = false href="https://twitch.tv/CoolSam9991"> <img draggable = false class="img" id="justin.tv" src="/content/twitch.png"/> </a> </center>
-  <center class="Bluesky"> <a draggable = false href="https://bsky.app/profile/coolsam999.bsky.social"> <img draggable = false class="img" id="Bluesky" src="/content/bluesky.png"/> </a> </center>
-  <center class="Reddit"> <a draggable = false href="https://reddit.com/r/coolsam999"> <img draggable = false class="img" id="Reddit" src="/content/reddit.png"/> </a> </center>
+  <div class="CoolSam999">
 
-</div>
+    <center class="Logo"> <img draggable=false id="Logo" src="/content/logo.png" height="140" style="margin-top: 20" /></center>
 
-<!-- Webpage created by CoolSam999 out of passion! -->
+    <center class="Clicks"> <h1 id="Clicks" style="color: white; background: radial-gradient(circle, rgb(111 104 104) 0%, rgb(27 24 24 / 0%) 90%, rgba(27, 24, 24, 1) 0%);"> </h1> </center>
+    <center class="YouTube"> <a draggable=false href="https://youtube.com/@Samm"> <img draggable=false class="img" id="YouTube" src="/content/youtube.png" /> </a> </center>
+    <center class="Twitter"> <a draggable=false href="https://x.com/CoolSam9991"> <img draggable=false class="img" id="Twitter" src="/content/twitter.png" /> </a> </center>
+    <center class="justin.tv"> <a draggable=false href="https://twitch.tv/CoolSam9991"> <img draggable=false class="img" id="justin.tv" src="/content/twitch.png" /> </a> </center>
+    <center class="Bluesky"> <a draggable=false href="https://bsky.app/profile/coolsam999.bsky.social"> <img draggable=false class="img" id="Bluesky" src="/content/bluesky.png" /> </a> </center>
+    <center class="Reddit"> <a draggable=false href="https://reddit.com/r/coolsam999"> <img draggable=false class="img" id="Reddit" src="/content/reddit.png" /> </a> </center>
 
-<link href="/style.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </div>
+
+  <link href="/style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script>
 
-  $('#Logo')
-    .data('counter', 0)
-    .mousedown(function() {
+    const counterCache = localStorage.getItem("CoolSam999");
+    var canStore = false;
+
+    if (counterCache) {
+      document.getElementById("Clicks").innerHTML = counterCache - 1 + " clicks!"
+      canStore = true;
+    }
+
+    function store(counter) {
+      localStorage.setItem('CoolSam999', counter);
+    }
+
+    $('#Logo')
+
+      .data('counter', counterCache ? parseInt(counterCache) : 0)
+
+      .mouseup(function () {
+        $(this).css('transform', 'rotate(0deg)');
+      })
+
+      .mousedown(function () {
+
+        var a = Math.floor(Math.random() * 2);
+
+        if (a == 0) {
+          $(this).css('transform', 'rotate(1deg)');
+        } else {
+          $(this).css('transform', 'rotate(-1deg)');
+        }
+
         var counter = $(this).data('counter');
+
         $(this).data('counter', counter + 1);
 
-        if (counter == 13) {
-         alert("Please stop. This isn't Cookie Clicker!");
+        if (canStore == true) {
+          store(counter + 1);
         }
-    });
 
-    $("body").on("contextmenu",function(e){
+        if (counter == 13) {
+          alert("Please stop. This isn't Cookie Clicker!");
+        }
+
+        if (counter == 22) {
+          document.getElementById("Clicks").innerHTML = counter + " clicks!"
+          store(counter);
+        }
+
+        if (counter >= 22) {
+          document.getElementById("Clicks").innerHTML = counter + " clicks!"
+        }
+
+      });
+
+    $("body").on("contextmenu", function () {
       return false;
     });
 
-        document.getElementById('YouTube').oncontextmenu = function() {
+    document.getElementById('YouTube').oncontextmenu = function () {
       window.location.href = "https://youtube.com/@Samm";
     }
 
-    document.getElementById('Twitter').oncontextmenu = function() {
+    document.getElementById('Twitter').oncontextmenu = function () {
       window.location.href = "https://x.com/CoolSam9991";
     }
 
-    document.getElementById('justin.tv').oncontextmenu = function() {
+    document.getElementById('justin.tv').oncontextmenu = function () {
       window.location.href = "https://twitch.tv/CoolSam9991";
     }
 
-    document.getElementById('Bluesky').oncontextmenu = function() {
+    document.getElementById('Bluesky').oncontextmenu = function () {
       window.location.href = "https://bsky.app/profile/coolsam999.bsky.social";
     }
 
-    document.getElementById('Reddit').oncontextmenu = function() {
+    document.getElementById('Reddit').oncontextmenu = function () {
       window.location.href = "https://reddit.com/r/coolsam999";
     }
+
+    $("img").mouseenter(function () {
+
+      if (this.id == "Logo") {
+        return;
+      }
+
+      const allButtons = document.querySelectorAll("img");
+      
+      allButtons.forEach(button => {
+
+        if (button.id != "Logo") {
+
+        if (button.id != this.id) {
+          button.style.opacity = "0.4";
+          button.style.height = "140px";
+          button.style.transition = "opacity 0.2s, height 0.2s";
+        } else {
+          button.style.opacity = "1";
+          button.style.height = "160px";
+          button.style.transition = "opacity 0.2s, height 0.2s";
+        }
+
+        }
+        
+      });
+
+    });
+
+    $("img").mouseleave(function () {
+
+      if (this.id == "Logo") {
+        return;
+      }
+
+      const allButtons = document.querySelectorAll("img");
+      
+      allButtons.forEach(button => {
+
+        if (button.id != "Logo") {
+          button.style.opacity = "1";
+          button.style.height = "140px";
+          button.style.transition = "opacity 0.2s, height 0.2s";
+        }
+      
+      });
+
+    });
 
   </script>
 
 </body>
+
 </html>
+
+<!-- Webpage created by CoolSam999 out of passion! -->
