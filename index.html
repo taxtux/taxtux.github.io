@@ -14,7 +14,7 @@
 
     <center class="Logo"> <img draggable=false id="Logo" src="/content/logo.png" height="140" style="margin-top: 20" /></center>
 
-    <center class="Clicks"> <h1 id="Clicks" style="color: white; background: radial-gradient(circle, rgb(111 104 104) 0%, rgb(27 24 24 / 0%) 90%, rgba(27, 24, 24, 1) 0%);"> </h1> </center>
+    <center class="Clicks"> <h1 id="Clicks" style="margin: auto; color: white; background: radial-gradient(circle, rgb(111 104 104) 0%, rgb(27 24 24 / 0%) 90%, rgba(27, 24, 24, 1) 0%);"> </h1> </center>
     <center class="YouTube"> <a draggable=false href="https://youtube.com/@Samm"> <img draggable=false class="img" id="YouTube" src="/content/youtube.png" /> </a> </center>
     <center class="Twitter"> <a draggable=false href="https://x.com/CoolSam9991"> <img draggable=false class="img" id="Twitter" src="/content/twitter.png" /> </a> </center>
     <center class="justin.tv"> <a draggable=false href="https://twitch.tv/CoolSam9991"> <img draggable=false class="img" id="justin.tv" src="/content/twitch.png" /> </a> </center>
@@ -32,6 +32,7 @@
     var canStore = false;
 
     if (counterCache) {
+      document.getElementById("Clicks").style.margin = "revert";
       document.getElementById("Clicks").innerHTML = counterCache - 1 + " clicks!"
       canStore = true;
     }
@@ -68,15 +69,18 @@
 
         if (counter == 13) {
           alert("Please stop. This isn't Cookie Clicker!");
+          $(this).css('transform', 'rotate(0deg)');
         }
 
         if (counter == 22) {
           document.getElementById("Clicks").innerHTML = counter + " clicks!"
+          canStore = true;
           store(counter);
         }
 
         if (counter >= 22) {
           document.getElementById("Clicks").innerHTML = counter + " clicks!"
+          document.getElementById("Clicks").style.margin = "revert";
         }
 
       });
